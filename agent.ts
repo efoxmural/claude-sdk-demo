@@ -39,6 +39,7 @@ const q = query({
     maxTurns: 20,
     includePartialMessages: true,
     model: "claude-haiku-4-5-20251001",
+    settingSources: ["project"],
     systemPrompt: {
       type: "preset",
       preset: "claude_code",
@@ -50,7 +51,12 @@ const q = query({
         url: "https://code.claude.com/docs/mcp"
       }
     },
-    allowedTools: ["Read", "Grep", "mcp__claude-code-docs__*"],
+    allowedTools: [
+      "Read", 
+      "Grep", 
+      "Skill", 
+      "mcp__claude-code-docs__*",
+    ],
   },
 });
 
