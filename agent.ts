@@ -18,6 +18,16 @@ async function* readStdinLines(): AsyncGenerator<string> {
 }
 
 async function* generateMessages(): AsyncGenerator<SDKUserMessage> {
+  yield {
+    type: "user",
+    message: { 
+      role: "user" as const, 
+      content: 'Tell me about yourself! What are you and what can you help me with?', 
+    },
+    parent_tool_use_id: null,
+    session_id: state.sessionId ?? "",
+  }
+
   for await (const line of readStdinLines()) {
     const trimmed = line.trim();
     if (!trimmed) continue;
