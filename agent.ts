@@ -38,13 +38,19 @@ const q = query({
   options: {
     maxTurns: 20,
     includePartialMessages: true,
-    allowedTools: ["Read", "Grep"],
     model: "claude-haiku-4-5-20251001",
     systemPrompt: {
       type: "preset",
       preset: "claude_code",
       append: SYSTEM_PROMPT,
-    }
+    },
+    mcpServers: {
+      "claude-code-docs": {
+        type: "http",
+        url: "https://code.claude.com/docs/mcp"
+      }
+    },
+    allowedTools: ["Read", "Grep", "mcp__claude-code-docs__*"],
   },
 });
 
