@@ -40,11 +40,7 @@ const q = query({
     includePartialMessages: true,
     model: "claude-haiku-4-5-20251001",
     settingSources: ["project"],
-    systemPrompt: {
-      type: "preset",
-      preset: "claude_code",
-      append: SYSTEM_PROMPT,
-    },
+    systemPrompt: SYSTEM_PROMPT,
     mcpServers: {
       "claude-code-docs": {
         type: "http",
@@ -56,6 +52,7 @@ const q = query({
       "Grep", 
       "Skill", 
       "mcp__claude-code-docs__*",
+      "web_fetch_20260209",
     ],
   },
 });
