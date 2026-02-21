@@ -23,10 +23,11 @@ OR
 
 ## Teaching examples
 
-- `[agent.ts](./agent.ts)` — This is the code that governs the actual agent thread! It's where you and the model talk to each other!
-- `[SYSTEM_PROMPT.md](./SYSTEM_PROMPT.md)` — This is the system prompt we use to extend the baseline system prompt that already comes with the Claude SDK!
-- `[.claude/skills/agent-skills-teacher](.claude/skills/agent-skills-teacher/SKILL.md)` — This is an agent skill for teach you about agent skills!
-- `[https://code.claude.com/docs/mcp](./agent.ts)` — This public MCP server is used to demonstrate how a remote-hosted MCP server exposed via HTTPS would be connect to the agent. It also makes this agent an expert on how to use Claude and the Claude Agent SDK!
+- [agent.ts](./agent.ts) — This is the code that governs the actual agent thread! It's where you and the model talk to each other!
+- [SYSTEM_PROMPT.md](./SYSTEM_PROMPT.md) — This is the system prompt we use to extend the baseline system prompt that already comes with the Claude SDK!
+- [.claude/skills/agent-skills-teacher](.claude/skills/agent-skills-teacher/SKILL.md) — This is an agent skill for teach you about agent skills!
+- [https://code.claude.com/docs/mcp](./agent.ts) — This public MCP server is used to demonstrate how a remote-hosted MCP server exposed via HTTPS would be connect to the agent. It also makes this agent an expert on how to use Claude and the Claude Agent SDK!
+- [trace.json](./trace.json) — After you've run the agent, the trace for your last thread will show up here! This shows what happens inside the agent thread that you normally don't see as an end-user!
 
 ## Further reading
 

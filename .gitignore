@@ -1,3 +1,6 @@
+# Agent Logs
+trace.json
+
 # Logs
 logs
 *.log

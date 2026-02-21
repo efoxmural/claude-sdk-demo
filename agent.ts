@@ -1,6 +1,6 @@
 import * as readline from "readline";
 import { query } from "@anthropic-ai/claude-agent-sdk";
-import type { SDKUserMessage } from "@anthropic-ai/claude-agent-sdk";
+import type { SDKUserMessage, SDKMessage, SDKAssistantMessage, SDKPartialAssistantMessage } from "@anthropic-ai/claude-agent-sdk";
 
 console.info(
   `Thread started using API key ending in "${process.env.ANTHROPIC_API_KEY?.slice(
@@ -67,27 +67,42 @@ const q = query({
   },
 });
 
+const trace = [];
+
 try {
-  for await (const message of q) {
+  let current_message = '';
+
+  for await (const message of q as AsyncGenerator<SDKPartialAssistantMessage>) {
     if ("session_id" in message && message.session_id) {
       state.sessionId = message.session_id;
     }
 
     if (message.type === "stream_event") {
       const event = message.event;
+
+      if (event.type === 'message_start') {
+        current_message = '';
+      }
+
+      if (event.type === 'message_stop') {
+        trace.push(current_message);
+      }
+
       if (event.type === "content_block_delta") {
         if (event.delta.type === "text_delta") {
+          current_message += event.delta.text;
           process.stdout.write(event.delta.text);
         }
       }
-    }
-
-    if (message.type === "assistant") {
-      process.stdout.write("\n");
+    } else {
+      process.stdout.write('\n');
+      trace.push(message);
     }
   }
 } finally {
   process.stdout.write("\nEnd of thread!\n");
+
+  Bun.file('./trace.json').write(JSON.stringify(trace, null, '  '));
 
   q.close();
   process.exit();
